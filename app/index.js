@@ -12,4 +12,8 @@ router.get('/',(req,res) =>{
     }});
   res.send('首页数据678899');
 })
+router.get('/login',(req,res,next) =>{
+  console.log(1234);
+  res.send('23434');
+})
 module.exports = router;
