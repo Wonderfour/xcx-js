@@ -19,6 +19,7 @@ router.get('/login',(req,res,next) =>{
   request({
     url:`https://api.weixin.qq.com/sns/jscode2session?appid=${config.APPID}&secret=${config.APPSECRET}&js_code=${req.code}&grant_type=authorization_code`
   })
-  res.send('23434');
+  res.send('1234'
+  );
 })
 module.exports = router;
