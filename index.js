@@ -6,7 +6,6 @@ var myLogger = function (req, res, next) {
   console.log('LOGGED')
   next()
 }
-
 app.use(myLogger)
 app.use('/admin',adminRouter);
 app.use('/xcx',xcxRouter);

@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const sqlData = require('../sql/mysql');
+let request = require('request');
+let config = require('./config');
 router.get('/',(req,res) =>{
   sqlData.getConnection(function (err,connection) { // 使用连接池
     if(err){
@@ -13,7 +15,10 @@ router.get('/',(req,res) =>{
   res.send('首页数据678899');
 })
 router.get('/login',(req,res,next) =>{
-  console.log(1234);
+  console.log(req);
+  request({
+    url:`https://api.weixin.qq.com/sns/jscode2session?appid=${config.APPID}&secret=${config.APPSECRET}&js_code=${req.code}&grant_type=authorization_code`
+  })
   res.send('23434');
 })
 module.exports = router;
