@@ -4,6 +4,6 @@ const connection = require('../sql/mysql');
 let request = require('request');
 let config = require('./config');
 router.get('/index',(req,res) =>{
-  res.send(JSON.stringify(req));
+  res.send(req);
 })
 module.exports = router;
