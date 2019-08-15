@@ -18,7 +18,7 @@
           "port": "22",
           "ref": "origin/master",
           "repo": "git@github.com:Wonderfour/xcx-js.git",
-          "path": "/var/ftp/pub/",
+          "path": "/var/ftp/pub/xcx-js/",
           "ssh_options": "StrictHostKeyChecking=no",
           "env": {
               "NODE_ENV": "production"

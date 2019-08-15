@@ -4,7 +4,7 @@ const connection = require('../sql/mysql');
 let request = require('request');
 let config = require('./config');
 router.get('/login1',(req,res) =>{
-  res.send('首页数据678899');
+  res.send('首页数据678899333');
 })
 router.get('/login',(req,res) =>{
   res.send(req.query);
