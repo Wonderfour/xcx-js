@@ -3,7 +3,7 @@ const router = express.Router();
 const connection = require('../sql/mysql');
 let request = require('request');
 let config = require('./config');
-router.get('/login1',(req,res) =>{
+router.get('/index',(req,res) =>{
   res.send('首页数据678899333');
 })
 router.get('/login',(req,res) =>{
