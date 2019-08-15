@@ -1,7 +1,7 @@
 {
   "apps":[
       {
-          "name": "xcx",
+          "name": "zhihu-admin",
           "script": "index.js",
           "env": {
               "COMMON_VARIABLE": "true"
