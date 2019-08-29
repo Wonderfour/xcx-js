@@ -22,11 +22,13 @@ router.get('/login',(req,res) =>{
         if(err) throw err;
         if(result.insertId){
           res.cookie("userId",result.insertId);
-          return res.json({code:0,msg: '操作成功','userId': result.insertId, openid: reqRes.openid});
+          res.cookie("openid",reqRes.openid);
+          return res.json({code:0,msg: '操作成功','userId': result.insertId, 'openid':reqRes.openid});
         }else{
           pool.query(userSql.getUserById(reqRes), function (err,result) {
             res.cookie("userId",result[0].id);
-            return res.json({code:0,msg: '操作成功','userId': result[0].id, openid: reqRes.openid});
+            res.cookie("openid",reqRes.openid);
+            return res.json({code:0,msg: '操作成功','userId': result[0].id, 'openid': reqRes.openid});
           });
         }
       })
