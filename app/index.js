@@ -37,4 +37,14 @@ router.get('/login',(req,res) =>{
     }
   });
 })
+
+router.get('/getUserInfo',(req,res) => {
+  console.log(req.query);
+  pool.query(userSql.getUserInfoByOpenId({openid:req.query.openid}), function (err,result) {
+    console.log(result[0].id);
+    if(err) throw err;
+    const resultData = result[0];
+    return res.json({code:0,msg: '获取成功',data:resultData});
+  })
+})
 module.exports = router;
