@@ -4,6 +4,7 @@ let request = require('request');
 let config = require('./config');
 const pool = require('../sql/mysql');
 const userSql = require('../sql/userSql');
+const artSql = require('../sql/artSql');
 
 router.get('/',(req,res,next) =>{
   res.send('小程序后台');
@@ -25,7 +26,8 @@ router.get('/login',(req,res) =>{
           res.cookie("openid",reqRes.openid);
           return res.json({code:0,msg: '操作成功','userId': result.insertId, 'openid':reqRes.openid});
         }else{
-          pool.query(userSql.getUserById(reqRes), function (err,result) {
+          pool.query(userSql.getUserInfoByOpenId(reqRes), function (err,result) {
+            console.log(result[0],6788)
             res.cookie("userId",result[0].id);
             res.cookie("openid",reqRes.openid);
             return res.json({code:0,msg: '操作成功','userId': result[0].id, 'openid': reqRes.openid});
@@ -50,6 +52,40 @@ router.get('/getUserInfo',(req,res) => {
   }else{
     return res.json({code:1,msg: 'openid未获取到'});
   }
+})
 
+router.get('/inSertUserInfoByOpenId',(req,res) => {
+  console.log(req.query);
+  if(req.query.openid){
+    const params = {
+      openid:req.query.openid,
+      userInfo:req.query.userInfo,
+      updateTime:new Date().Format("yyyy-MM-dd hh:mm:ss")
+    }
+    pool.query(userSql.inSertUserInfoByOpenId(params), function (err,result) {
+      console.log(result);
+      if(err) throw err;
+      return res.json({code:0,msg: '插入用户信息成功'});
+    })
+  }else{
+    return res.json({code:1,msg: '插入用户信息失败'});
+  }
+})
+
+router.get('/getArticleList',(req,res) => {
+  console.log(req.query);
+  pool.query(artSql.getArticleList(), function (err,result) {
+    console.log(result);
+    if(err) throw err;
+    return res.json({code:0,msg: '查询成功',data:result});
+  })
+})
+router.get('/getArticleDetail',(req,res) => {
+  console.log(req.query);
+  pool.query(artSql.getArticleListById({id:req.query.id}), function (err,result) {
+    console.log(result);
+    if(err) throw err;
+    return res.json({code:0,msg: '查询成功',data:result[0]});
+  })
 })
 module.exports = router;
