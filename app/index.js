@@ -74,12 +74,35 @@ router.get('/inSertUserInfoByOpenId',(req,res) => {
 
 router.get('/getArticleList',(req,res) => {
   console.log(req.query);
-  pool.query(artSql.getArticleList(), function (err,result) {
-    console.log(result);
-    if(err) throw err;
-    return res.json({code:0,msg: '查询成功',data:result});
+  pool.query(artSql.getArticleList(), function (err,list) {
+    pool.query(artSql.getArticleListBanner(), function (err,banner) {
+      if(list || banner){
+        return res.json({code:0,msg: '获取信息成功',data:{list:list,banner:banner}});
+      }else{
+        throw err
+      }
+    })
+
   })
 })
+function getList(){
+  return new Promise((resolve,reject) => {
+    pool.query(artSql.getArticleList(), function (err,result) {
+      console.log(result);
+      if(err){
+        reject({err:err});
+        return;
+      };
+      resolve({result:result})
+
+    })
+  })
+}
+function actBanner(){
+  return new Promise((resolve,reject) => {
+
+  })
+}
 router.get('/getArticleDetail',(req,res) => {
   console.log(req.query);
   pool.query(artSql.getArticleListById({id:req.query.id}), function (err,result) {
