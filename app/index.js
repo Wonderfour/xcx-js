@@ -27,7 +27,6 @@ router.get('/login',(req,res) =>{
           return res.json({code:0,msg: '操作成功','userId': result.insertId, 'openid':reqRes.openid});
         }else{
           pool.query(userSql.getUserInfoByOpenId(reqRes), function (err,result) {
-            console.log(result[0],6788)
             res.cookie("userId",result[0].id);
             res.cookie("openid",reqRes.openid);
             return res.json({code:0,msg: '操作成功','userId': result[0].id, 'openid': reqRes.openid});
@@ -41,7 +40,6 @@ router.get('/login',(req,res) =>{
 })
 
 router.get('/getUserInfo',(req,res) => {
-  console.log(req.query);
   if(req.query.openid){
     pool.query(userSql.getUserInfoByOpenId({openid:req.query.openid}), function (err,result) {
       console.log(result[0].id);
@@ -55,7 +53,6 @@ router.get('/getUserInfo',(req,res) => {
 })
 
 router.get('/inSertUserInfoByOpenId',(req,res) => {
-  console.log(req.query);
   if(req.query.openid){
     const params = {
       openid:req.query.openid,
