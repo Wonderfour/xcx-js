@@ -69,6 +69,7 @@ router.get('/inSertUserInfoByOpenId',(req,res) => {
   }
 })
 
+
 router.get('/getArticleList',(req,res) => {
   pool.query(artSql.getArticleList(), function (err,list) {
     pool.query(artSql.getArticleListBanner(), function (err,banner) {
@@ -81,24 +82,7 @@ router.get('/getArticleList',(req,res) => {
 
   })
 })
-function getList(){
-  return new Promise((resolve,reject) => {
-    pool.query(artSql.getArticleList(), function (err,result) {
-      console.log(result);
-      if(err){
-        reject({err:err});
-        return;
-      };
-      resolve({result:result})
 
-    })
-  })
-}
-function actBanner(){
-  return new Promise((resolve,reject) => {
-
-  })
-}
 router.get('/getArticleDetail',(req,res) => {
   console.log(req.query);
   pool.query(artSql.getArticleListById({id:req.query.id}), function (err,result) {
