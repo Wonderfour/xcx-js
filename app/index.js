@@ -70,7 +70,6 @@ router.get('/inSertUserInfoByOpenId',(req,res) => {
 })
 
 router.get('/getArticleList',(req,res) => {
-  console.log(req.query);
   pool.query(artSql.getArticleList(), function (err,list) {
     pool.query(artSql.getArticleListBanner(), function (err,banner) {
       if(list || banner){
