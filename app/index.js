@@ -68,8 +68,6 @@ router.get('/inSertUserInfoByOpenId',(req,res) => {
     return res.json({code:1,msg: '插入用户信息失败'});
   }
 })
-
-
 router.get('/getArticleList',(req,res) => {
   pool.query(artSql.getArticleList(), function (err,list) {
     pool.query(artSql.getArticleListBanner(), function (err,banner) {
