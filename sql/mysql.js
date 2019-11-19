@@ -6,8 +6,15 @@ const dbConfig = {
     user     : 'dms', // 用户名
     password : 'Limeng1126!@#$' // 密码，我的密码是空。所以是空字符串
 }
-const pool = mysql.createPool(dbConfig);
+const localConfig = {
+    host     : 'localhost',  // 主机名
+    port     : 3306, // 数据库连接的端口号 默认是3306
+    database : 'ydd', // 需要查询的数据库
+    user     : 'root', // 用户名
+    password : 'root1126' // 密码，我的密码是空。所以是空字符串
+}
 
+const pool = mysql.createPool(localConfig);
 function query(sql, callback) {
     pool.getConnection(function (err, connection) {
         if(err) throw err;

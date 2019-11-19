@@ -70,17 +70,22 @@ router.get('/inSertUserInfoByOpenId',(req,res) => {
 })
 router.get('/getArticleList',(req,res) => {
   pool.query(artSql.getArticleList(), function (err,list) {
+    if(list){
+      return res.json({code:0,msg: '获取信息成功',data:{list:list}});
+    }else{
+      throw err
+    }
+  })
+})
+router.get('/getArticleBanner',(req,res) => {
     pool.query(artSql.getArticleListBanner(), function (err,banner) {
-      if(list || banner){
-        return res.json({code:0,msg: '获取信息成功',data:{list:list,banner:banner}});
+      if(banner){
+        return res.json({code:0,msg: '获取信息成功',data:{banner:banner}});
       }else{
         throw err
       }
     })
-
-  })
 })
-
 router.get('/getArticleDetail',(req,res) => {
   console.log(req.query);
   pool.query(artSql.getArticleListById({id:req.query.id}), function (err,result) {
