@@ -14,7 +14,7 @@ const localConfig = {
     password : 'root1126' // 密码，我的密码是空。所以是空字符串
 }
 
-const pool = mysql.createPool(localConfig);
+const pool = mysql.createPool(dbConfig);
 function query(sql, callback) {
     pool.getConnection(function (err, connection) {
         if(err) throw err;

@@ -87,9 +87,7 @@ router.get('/getArticleBanner',(req,res) => {
     })
 })
 router.get('/getArticleDetail',(req,res) => {
-  console.log(req.query);
   pool.query(artSql.getArticleListById({id:req.query.id}), function (err,result) {
-    console.log(result);
     if(err) throw err;
     return res.json({code:0,msg: '查询成功',data:result[0]});
   })
